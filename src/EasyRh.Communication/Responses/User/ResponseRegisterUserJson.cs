@@ -1,6 +1,6 @@
-﻿using EasyRh_Communication.Enum;
+﻿using EasyRh.Communication.Enum;
 
-namespace EasyRh_Communication.Responses.User;
+namespace EasyRh.Communication.Responses.User;
 
 public class ResponseRegisterUserJson
 {

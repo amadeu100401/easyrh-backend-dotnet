@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\EasyRh.Application.csproj" />
-    <ProjectReference Include="..\EasyRh-Communication\EasyRh.Communication.csproj" />
+    <ProjectReference Include="..\EasyRh.Communication\EasyRh.Communication.csproj" />
     <ProjectReference Include="..\Infra\EasyRh.Infra.csproj" />
   </ItemGroup>
 </Project>

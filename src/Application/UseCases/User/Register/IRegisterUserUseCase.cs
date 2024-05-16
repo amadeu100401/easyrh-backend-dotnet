@@ -1,5 +1,5 @@
-﻿using EasyRh_Communication.Requests.User;
-using EasyRh_Communication.Responses.User;
+﻿using EasyRh.Communication.Requests.User;
+using EasyRh.Communication.Responses.User;
 
 namespace EasyRh.Application.UseCases.User.Register;
 

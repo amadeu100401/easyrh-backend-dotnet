@@ -1,7 +1,7 @@
-﻿using EasyRh_Communication.Enum;
-using EasyRh_Communication.Requests.Address;
+﻿using EasyRh.Communication.Enum;
+using EasyRh.Communication.Requests.Address;
 
-namespace EasyRh_Communication.Requests.User;
+namespace EasyRh.Communication.Requests.User;
 
 public class RequestRegisterUserJson
 {

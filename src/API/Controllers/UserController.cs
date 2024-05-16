@@ -1,7 +1,7 @@
 #region USING
 using EasyRh.Application.UseCases.User.Register;
-using EasyRh_Communication.Requests.User;
-using EasyRh_Communication.Responses.User;
+using EasyRh.Communication.Requests.User;
+using EasyRh.Communication.Responses.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

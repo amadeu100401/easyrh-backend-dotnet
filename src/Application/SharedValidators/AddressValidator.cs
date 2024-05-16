@@ -1,4 +1,4 @@
-﻿using EasyRh_Communication.Requests.Address;
+﻿using EasyRh.Communication.Requests.Address;
 using FluentValidation;
 
 namespace EasyRh.Application.SharedValidators;

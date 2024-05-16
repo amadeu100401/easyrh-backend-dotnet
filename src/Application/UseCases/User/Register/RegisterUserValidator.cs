@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using EasyRh.Application.SharedValidators;
-using EasyRh_Communication.Requests.User;
-using EasyRh_Communication.Enum;
+using EasyRh.Communication.Requests.User;
+using EasyRh.Communication.Enum;
 
 namespace EasyRh.Application.UseCases.User.Register;
 

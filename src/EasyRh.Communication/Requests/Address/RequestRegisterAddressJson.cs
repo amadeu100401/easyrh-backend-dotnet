@@ -1,4 +1,4 @@
-﻿namespace EasyRh_Communication.Requests.Address;
+﻿namespace EasyRh.Communication.Requests.Address;
 
 public class RequestRegisterAddressJson
 {

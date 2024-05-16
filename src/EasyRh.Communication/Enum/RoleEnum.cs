@@ -1,4 +1,4 @@
-﻿namespace EasyRh_Communication.Enum;
+﻿namespace EasyRh.Communication.Enum;
 
 public enum RoleEnum
 {

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EasyRh-Communication\EasyRh.Communication.csproj" />
+    <ProjectReference Include="..\EasyRh.Communication\EasyRh.Communication.csproj" />
     <ProjectReference Include="..\EasyRh.Exceptions\EasyRh.Exceptions.csproj" />
     <ProjectReference Include="..\Domain\EasyRh.DOmain.csproj" />
   </ItemGroup>
