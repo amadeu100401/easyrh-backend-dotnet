@@ -1,6 +1,7 @@
 ﻿#region USINGS
 using EasyRh.Application.Services.AutoMapper;
-using EasyRh.Application.UseCases.User.Register;
+using EasyRh.Application.UseCases.UserUseCases.Login;
+using EasyRh.Application.UseCases.UserUseCases.Register;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 #endregion
@@ -27,5 +28,6 @@ public static class DependencyInjectionExtension
     private static void AddUseCase(IServiceCollection services)
     {
         services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        services.AddScoped<ILoginUseCase, LoginUseCase>();
     }
 }

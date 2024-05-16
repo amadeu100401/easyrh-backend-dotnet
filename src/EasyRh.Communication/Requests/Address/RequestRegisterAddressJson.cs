@@ -10,4 +10,6 @@ public class RequestRegisterAddressJson
     public string State { get; set; }
     public string ZipCode { get; set; }
     public string Country { get; set; }
+    public bool IsAdm { get; set; }
+    public DateTime? HireDate { get; set; }
 }

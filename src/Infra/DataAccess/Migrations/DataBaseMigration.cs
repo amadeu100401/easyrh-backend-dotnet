@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using MySqlConnector;
 
@@ -9,6 +10,7 @@ public static class DataBaseMigration
     public static void Migrate(string connectionString, IServiceProvider services)
     {
         EnsureDbCreated(connectionString);
+        RunMigartion(services);
     }
 
     private static void EnsureDbCreated(string connectionString)
@@ -40,4 +42,13 @@ public static class DataBaseMigration
     private static MySqlConnection GetDbConnection(string connectionString) => new MySqlConnection(connectionString);
 
     private static void CreateDataBase(MySqlConnection dbConnection, string dbName) => dbConnection.Execute($"CREATE DATABASE {dbName};");
+
+    private static void RunMigartion(IServiceProvider services)
+    {
+        var runner = services.GetRequiredService<IMigrationRunner>();
+
+        runner.ListMigrations();
+
+        runner.MigrateUp(); 
+    }
 }

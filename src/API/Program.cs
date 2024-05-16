@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 using EasyRh.Application;
+using EasyRh.Infra;
 using EasyRh.Infra.DataAccess.Migrations;
 using EasyRh.Infra.Extensions;
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 
 //Fazendo as injeções de dependencia
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddInfraestruture(builder.Configuration);
 
 var app = builder.Build();
 

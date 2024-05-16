@@ -3,7 +3,7 @@ using EasyRh.Application.SharedValidators;
 using EasyRh.Communication.Requests.User;
 using EasyRh.Communication.Enum;
 
-namespace EasyRh.Application.UseCases.User.Register;
+namespace EasyRh.Application.UseCases.UserUseCases.Register;
 
 public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
 {
@@ -22,8 +22,11 @@ public class RegisterUserValidator : AbstractValidator<RequestRegisterUserJson>
             RuleFor(user => user.EnterpriseSerialIdentifier).NotEmpty()
                 .WithMessage("O identificador da empresa deve ser informado quando o usuário não for um administrador.");
         });
-        RuleFor(user => user.Gener).NotEmpty().WithMessage("O campo genero é obrigatório.");
         RuleFor(user => user.Address).SetValidator(new AddressValidator());
+        When(user => !user.Role.Equals(RoleEnum.ADM), () =>
+        {
+            RuleFor(user => user.Role).NotEmpty().WithMessage("O cargo deve ser preenchido");
+        });
     }
 
     private bool IsAdmUser(RoleEnum role) => role.Equals(0);

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using EasyRh.Communication.Requests.User;
 using EasyRh.Domain.Entities;
+using EasyRh.Communication.Requests.User;
 
 namespace EasyRh.Application.Services.AutoMapper;
 

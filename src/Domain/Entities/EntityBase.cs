@@ -6,4 +6,5 @@ public class EntityBase
     public bool Active { get; set; } = true;
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     public DateTime UpdateOn { get; set; } = DateTime.UtcNow;
+    public Guid Identifier { get; set; }
 }

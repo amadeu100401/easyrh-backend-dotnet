@@ -1,10 +1,10 @@
 #region USING
-using EasyRh.Application.UseCases.User.Register;
-using EasyRh.Communication.Requests.User;
 using EasyRh.Communication.Responses.User;
+using EasyRh.Communication.Requests.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using EasyRh.Application.UseCases.UserUseCases.Register;
 #endregion
 
 namespace EasyRh.API.Controllers;
@@ -12,7 +12,7 @@ namespace EasyRh.API.Controllers;
 public class UserController : EasyRhBaseController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ResponseUserJson), StatusCodes.Status201Created)]
     public async Task<IActionResult> RegisterUser([FromBody] RequestRegisterUserJson request,
         [FromServices] IRegisterUserUseCase useCase)
     {
