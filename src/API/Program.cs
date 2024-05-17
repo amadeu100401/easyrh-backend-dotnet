@@ -6,6 +6,7 @@ using EasyRh.Application;
 using EasyRh.Infra;
 using EasyRh.Infra.DataAccess.Migrations;
 using EasyRh.Infra.Extensions;
+using EasyRh.API.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Adicionando o ExceptionFilters como classe principal de erro do sistema
+builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters)));
 
 //Fazendo as injeções de dependencia
 builder.Services.AddApplication(builder.Configuration);

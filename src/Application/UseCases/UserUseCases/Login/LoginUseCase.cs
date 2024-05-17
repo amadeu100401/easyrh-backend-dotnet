@@ -6,6 +6,7 @@ using EasyRh.Domain.Enum;
 using EasyRh.Domain.Repositories.UserRepository;
 using EasyRh.Domain.Security.Cryptography;
 using EasyRh.Domain.Security.Token;
+using EasyRh.Exceptions.ExceptionBase;
 
 namespace EasyRh.Application.UseCases.UserUseCases.Login;
 
@@ -38,7 +39,8 @@ public class LoginUseCase : ILoginUseCase
 
         if (!result.IsValid)
         {
-            throw new Exception("Não foi possível fazer o login: Credênciais inválidas");
+            var errorMessage = GetErrorMessage(result);
+            throw new ErrorOnValidationException(errorMessage);
         }
     }
 
@@ -56,8 +58,20 @@ public class LoginUseCase : ILoginUseCase
         }
         else
         {
-            throw new Exception("Não foi possível fazer o login: Credênciais inválidas");
+            throw new InvalidLoginException();
         }
+    }
+
+    private List<String> GetErrorMessage(FluentValidation.Results.ValidationResult result)
+    {
+        var ErrorMessages = new List<String>();
+
+        foreach (var error in result.Errors)
+        {
+            ErrorMessages.Add(error.ErrorMessage);  
+        }
+
+        return ErrorMessages;
     }
 
     private async Task<User> GetUserInDb(string email) => await _repository.GetUserByEmail(email);
