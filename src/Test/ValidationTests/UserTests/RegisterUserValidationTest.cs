@@ -1,8 +1,7 @@
 ﻿using EasyRh.Application.UseCases.UserUseCases.Register;
 using EasyRh.Communication.Requests.User;
-using Utilities.Builders.UserBuilders;
-
 using FluentAssertions;
+using Utilities.Builders.UserBuilders;
 
 namespace ValidationTests.UserTests;
 

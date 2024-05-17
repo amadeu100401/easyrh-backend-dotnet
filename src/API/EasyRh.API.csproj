@@ -15,5 +15,7 @@
     <ProjectReference Include="..\Application\EasyRh.Application.csproj" />
     <ProjectReference Include="..\EasyRh.Communication\EasyRh.Communication.csproj" />
     <ProjectReference Include="..\Infra\EasyRh.Infra.csproj" />
+    <ProjectReference Include="..\Shared\EasyRh.Communication\EasyRh.Communication.csproj" />
+    <ProjectReference Include="..\Shared\EasyRh.Exceptions\EasyRh.Exceptions.csproj" />
   </ItemGroup>
 </Project>

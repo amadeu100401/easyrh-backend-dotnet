@@ -2,8 +2,10 @@
 using EasyRh.Communication.Requests.Login;
 using EasyRh.Communication.Responses.User;
 using EasyRh.Domain.Entities;
+using EasyRh.Domain.Enum;
 using EasyRh.Domain.Repositories.UserRepository;
 using EasyRh.Domain.Security.Cryptography;
+using EasyRh.Domain.Security.Token;
 
 namespace EasyRh.Application.UseCases.UserUseCases.Login;
 
@@ -11,12 +13,14 @@ public class LoginUseCase : ILoginUseCase
 {
     private readonly IUserReadOnlyRepository _repository;
     private readonly IAuthUser _auth;
+    private readonly IAccessTokenGenerete _token;
 
     public LoginUseCase(IUserReadOnlyRepository userReadOnlyRepository,
-        IAuthUser authUser)
+        IAuthUser authUser, IAccessTokenGenerete token)
     {
-        _repository = userReadOnlyRepository;   
+        _repository = userReadOnlyRepository;
         _auth = authUser;
+        _token = token;
     }
 
     public async Task<ResponseUserJson> Execute(RequestLoginJson request)
@@ -32,7 +36,7 @@ public class LoginUseCase : ILoginUseCase
     {
         var result = DoRequestValidation(request);
 
-        if(!result.IsValid)
+        if (!result.IsValid)
         {
             throw new Exception("Não foi possível fazer o login: Credênciais inválidas");
         }
@@ -46,7 +50,7 @@ public class LoginUseCase : ILoginUseCase
 
         var isValidPassword = DoComparePasswords(request.Password, user.Identifier.ToString(), user.Password, user.PasswordSalt);
 
-        if(isValidPassword)
+        if (isValidPassword)
         {
             return BuildUserResponse(user);
         }
@@ -58,17 +62,21 @@ public class LoginUseCase : ILoginUseCase
 
     private async Task<User> GetUserInDb(string email) => await _repository.GetUserByEmail(email);
 
-    private bool DoComparePasswords(string requestPassword, string userGuid, string storedHash, string storedSalt) 
+    private bool DoComparePasswords(string requestPassword, string userGuid, string storedHash, string storedSalt)
         => _auth.ComparePasswords(requestPassword, userGuid, storedHash, storedSalt);
 
     private ResponseUserJson BuildUserResponse(User user)
     {
-        return new ResponseUserJson 
+        return new ResponseUserJson
         {
-            Name = user.Name,   
-            Role = (RoleEnum)Enum.Parse(typeof(RoleEnum), user.Role.ToString()),
-            AccessToken = "TesteTokenTeste"
+            Name = user.Name,
+            Role = GetUserRole(user.Role),
+            AccessToken = GenerateAccessToken(user)
         };
     }
+
+    private RoleEnum GetUserRole(RoleDomainEnum role) => (RoleEnum)Enum.Parse(typeof(RoleEnum), role.ToString());
+
+    private string GenerateAccessToken(User user) => _token.Generate(user);
 
 }

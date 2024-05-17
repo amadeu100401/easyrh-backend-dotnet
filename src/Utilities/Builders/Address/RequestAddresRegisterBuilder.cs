@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using EasyRh.Communication.Requests.Address;
-using EasyRh.Communication.Requests.User;
 
 namespace Utilities.Builders.Address;
 

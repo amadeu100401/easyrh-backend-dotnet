@@ -1,10 +1,10 @@
 #region USING
-using EasyRh.Communication.Responses.User;
+using EasyRh.Application.UseCases.UserUseCases.Register;
 using EasyRh.Communication.Requests.User;
+using EasyRh.Communication.Responses.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using EasyRh.Application.UseCases.UserUseCases.Register;
 #endregion
 
 namespace EasyRh.API.Controllers;

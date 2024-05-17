@@ -1,9 +1,9 @@
 ﻿using Bogus;
-using EasyRh.Communication.Requests.User;
 using EasyRh.Communication.Enum;
-using Utilities.Tools;
 using EasyRh.Communication.Requests.Address;
+using EasyRh.Communication.Requests.User;
 using Utilities.Builders.Address;
+using Utilities.Tools;
 
 namespace Utilities.Builders.UserBuilders;
 

@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Application\EasyRh.Application.csproj" />
     <ProjectReference Include="..\..\EasyRh.Communication\EasyRh.Communication.csproj" />
+    <ProjectReference Include="..\..\Shared\EasyRh.Communication\EasyRh.Communication.csproj" />
     <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
