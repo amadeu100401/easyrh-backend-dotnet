@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using EasyRh.Exceptions;
+using FluentValidation;
 using FluentValidation.Validators;
 using System.Text.RegularExpressions;
 
@@ -14,13 +15,13 @@ public class ZipCodeValidator<T> : PropertyValidator<T, string>
     {
         if (IsNullOrBlnk(zipCode))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "O código postal deve ser informado.");
+            context.MessageFormatter.AppendArgument("ErrorMessage",ResourceErrorMessage.No_ZipCode);
             return false;
         }
 
         if (IsInValidZipCode(zipCode))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "O código postal informado é invalido.");
+            context.MessageFormatter.AppendArgument("ErrorMessage",ResourceErrorMessage.Invalid_ZipCode);
             return false;
         }
 
@@ -30,5 +31,7 @@ public class ZipCodeValidator<T> : PropertyValidator<T, string>
     private bool IsNullOrBlnk(string zipCode) => string.IsNullOrWhiteSpace(zipCode);
 
     private bool IsInValidZipCode(string zipCode) => _zipCodeRegex.IsMatch(zipCode);
+
+    protected override string GetDefaultMessageTemplate(string errorCode) => "{ErrorMessage}";
 
 }

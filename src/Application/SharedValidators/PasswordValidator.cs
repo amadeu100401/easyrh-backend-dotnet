@@ -2,6 +2,8 @@
 using FluentValidation.Validators;
 using System.Text.RegularExpressions;
 
+using EasyRh.Exceptions;
+
 namespace EasyRh.Application.SharedValidators;
 
 public class PasswordValidator<T> : PropertyValidator<T, string>
@@ -14,13 +16,13 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
     {
         if(IsNullOrBlank(password))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "A senha deve ser informada");
+            context.MessageFormatter.AppendArgument("ErrorMessage", ResourceErrorMessage.No_Password);
             return false;
         }
 
         if (IsInvalidPassword(password))
         {
-            context.MessageFormatter.AppendArgument("ErrorMessage", "A senha deve ser informada deve ter o formáto válido");
+            context.MessageFormatter.AppendArgument("ErrorMessage", ResourceErrorMessage.Invalid_Password_Format);
             return false;
         }
 
@@ -30,4 +32,6 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
     private bool IsNullOrBlank(string password) => string.IsNullOrWhiteSpace(password);
 
     private bool IsInvalidPassword(string password) => !_regexPasswordRule.IsMatch(password);
+
+    protected override string GetDefaultMessageTemplate(string errorCode) => "{ErrorMessage}";
 }

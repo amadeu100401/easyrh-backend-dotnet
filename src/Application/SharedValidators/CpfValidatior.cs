@@ -31,4 +31,6 @@ public class CpfValidatior<T> : PropertyValidator<T, string>
     private bool CpfIsEmptyOrBlank(string cpf) => string.IsNullOrWhiteSpace(cpf);
 
     private bool IsInvalidValidCpf(string cpf) => _cpfRegex.IsMatch(cpf);
+
+    protected override string GetDefaultMessageTemplate(string errorCode) => "{ErrorMessage}";
 }

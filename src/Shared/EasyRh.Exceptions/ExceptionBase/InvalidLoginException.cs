@@ -2,5 +2,5 @@
 
 public class InvalidLoginException : EasyRhException
 {
-    public InvalidLoginException() : base("Credênciais inválidas") { }
+    public InvalidLoginException() : base(ResourceErrorMessage.Invalid_Id) { }
 }
