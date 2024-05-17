@@ -12,7 +12,7 @@ public class Version0000001 : VersionBase
             .WithColumn("Email").AsAnsiString(150).NotNullable()
             .WithColumn("Password").AsAnsiString(2000).NotNullable()
             .WithColumn("PhoneNumber").AsAnsiString(15).Nullable()
-            .WithColumn("Gener").AsAnsiString(1).Nullable() 
+            .WithColumn("Gender").AsAnsiString(1).Nullable() 
             .WithColumn("Cpf").AsAnsiString(11).NotNullable()
             .WithColumn("DateBirth").AsDateTime().NotNullable()
             .WithColumn("HireDate").AsDateTime().Nullable()

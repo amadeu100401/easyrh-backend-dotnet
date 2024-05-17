@@ -11,7 +11,7 @@ public class RequestRegisterUserJson
     public string PhoneNumber { get; set; }
     public string Cpf { get; set; }
     public string DateBirth { get; set; }
-    public string Gener { get; set; }
+    public string Gender { get; set; }
     public string EnterpriseSerialIdentifier { get; set; }
     public RoleEnum Role { get; set; }
     public RequestRegisterAddressJson Address { get; set; }

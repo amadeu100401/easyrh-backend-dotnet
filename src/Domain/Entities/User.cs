@@ -12,7 +12,7 @@ public class User : EntityBase
     public string Cpf { get; set; }
     public DateTime DateBirth { get; set; }
     public DateTime HireDate { get; set; }
-    public string Gener { get; set; }
+    public string Gender { get; set; }
     public string EnterpriseSerialIdentifier { get; set; }
     public RoleDomainEnum Role { get; set; }
 }
