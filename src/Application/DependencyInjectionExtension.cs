@@ -2,6 +2,7 @@
 using EasyRh.Application.Services.AutoMapper;
 using EasyRh.Application.UseCases.UserUseCases.Login;
 using EasyRh.Application.UseCases.UserUseCases.Register;
+using EasyRh.Domain.Security.Token;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 #endregion

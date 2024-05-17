@@ -2,10 +2,12 @@
 using EasyRh.Domain.Repositories;
 using EasyRh.Domain.Repositories.UserRepository;
 using EasyRh.Domain.Security.Cryptography;
+using EasyRh.Domain.Security.Token;
 using EasyRh.Infra.DataAccess;
 using EasyRh.Infra.DataAccess.Repositories;
 using EasyRh.Infra.Extensions;
 using EasyRh.Infra.Security.Cryptography;
+using EasyRh.Infra.Security.Token;
 using FluentMigrator.Runner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,7 @@ public static class DependencyInjection
         AddDbContext_MySql(services, configuration);
         AddFluentMigrator_MySql(services, configuration);
         AddPasswordSecurity(services, configuration);
+        AddTokenGenerate(services, configuration);
     }
 
     private static void AddDbContext_MySql(IServiceCollection services, IConfiguration configuration)
@@ -65,5 +68,13 @@ public static class DependencyInjection
 
         services.AddScoped<IPasswordEncrypter>(options => new PasswordEncrypter(additionalPasswordSign));
         services.AddScoped<IAuthUser>(options => new PasswordEncrypter(additionalPasswordSign));
+    }
+
+    private static void AddTokenGenerate(IServiceCollection services, IConfiguration configuration)
+    {
+        var secret = configuration.GetSection("Setting:Jwt:SigningKey").Value;
+        var expirationTime = configuration.GetSection("Setting:Jwt:ExpirationTimeMinutes").Value;
+
+        services.AddScoped<IAccessTokenGenerete>(option => new JwtTokenBuilder(secret, uint.Parse(expirationTime)));
     }
 }
