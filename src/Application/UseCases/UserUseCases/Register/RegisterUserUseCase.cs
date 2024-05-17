@@ -6,6 +6,7 @@ using EasyRh.Domain.Entities;
 using EasyRh.Domain.Repositories;
 using EasyRh.Domain.Repositories.UserRepository;
 using EasyRh.Domain.Security.Cryptography;
+using EasyRh.Domain.Security.Token;
 
 namespace EasyRh.Application.UseCases.UserUseCases.Register;
 
@@ -16,25 +17,27 @@ public class RegisterUserUseCase : IRegisterUserUseCase
     private readonly IUserWriteOnlyRepository _writeRepository;
     private readonly IPasswordEncrypter _passwordEncrypter;
     private readonly IUnityOfWork _unityOfWork;
+    private readonly IAccessTokenGenerete _token;
 
     public RegisterUserUseCase(IMapper mapper, IUserWriteOnlyRepository writeRepository,
         IUserReadOnlyRepository readRepository, IPasswordEncrypter passwordEncrypter,
-        IUnityOfWork unityOfWork)
+        IUnityOfWork unityOfWork, IAccessTokenGenerete token)
     {
         _mapper = mapper;
         _writeRepository = writeRepository;
         _readRepository = readRepository;
         _passwordEncrypter = passwordEncrypter;
         _unityOfWork = unityOfWork;
+        _token = token;
     }
 
     public async Task<ResponseUserJson> Execute(RequestRegisterUserJson request)
     {
         await Validations(request);
 
-        await SaveUser(await BuildUserEntity(request));
+        var user = await SaveUser(await BuildUserEntity(request));
 
-        return BuildResponse(request);
+        return BuildResponse(user);
     }
 
     private async Task Validations(RequestRegisterUserJson request)
@@ -88,20 +91,22 @@ public class RegisterUserUseCase : IRegisterUserUseCase
         return (encryptedPassword, passwordSalt);
     }
 
-    private async Task SaveUser(User data)
+    private async Task<User> SaveUser(User data)
     {
         await _writeRepository.SaveUser(data);
 
         await _unityOfWork.commit();
+
+        return data;
     }
 
-    private ResponseUserJson BuildResponse(RequestRegisterUserJson request)
+    private ResponseUserJson BuildResponse(User user)
     {
         return new ResponseUserJson
         {
-            Name = request.Name,
-            Role = (RoleEnum)Enum.Parse(typeof(RoleEnum), request.Role.ToString()),
-            AccessToken = "Teste"
+            Name = user.Name,
+            Role = (RoleEnum)Enum.Parse(typeof(RoleEnum), user.Role.ToString()),
+            AccessToken = _token.Generate(user)
         };
     }
 
