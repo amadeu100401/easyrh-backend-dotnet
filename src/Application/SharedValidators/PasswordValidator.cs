@@ -18,7 +18,7 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
             return false;
         }
 
-        if (IsValidPassword(password))
+        if (IsInvalidPassword(password))
         {
             context.MessageFormatter.AppendArgument("ErrorMessage", "A senha deve ser informada deve ter o formáto válido");
             return false;
@@ -29,5 +29,5 @@ public class PasswordValidator<T> : PropertyValidator<T, string>
 
     private bool IsNullOrBlank(string password) => string.IsNullOrWhiteSpace(password);
 
-    private bool IsValidPassword(string password) => _regexPasswordRule.IsMatch(password);
+    private bool IsInvalidPassword(string password) => !_regexPasswordRule.IsMatch(password);
 }
