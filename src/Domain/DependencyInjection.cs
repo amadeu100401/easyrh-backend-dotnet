@@ -1,4 +1,5 @@
-﻿using EasyRh.Domain.Service.UserService;
+﻿using EasyRh.Domain.Service.LoginService;
+using EasyRh.Domain.Service.UserService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,5 +25,6 @@ public static class DependencyInjection
     private static void AddServices(IServiceCollection service)
     {
         service.AddScoped<IRegisterUserService, RegisterUserService>();
+        service.AddScoped<ILoginService, LoginService>();
     }
 }
