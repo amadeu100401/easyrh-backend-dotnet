@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using EasyRh.Domain;
 using EasyRh.Application;
 using EasyRh.Infra;
 using EasyRh.Infra.DataAccess.Migrations;
@@ -23,6 +24,7 @@ builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilters))
 //Fazendo as injeções de dependencia
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddInfraestruture(builder.Configuration);
+builder.Services.AddDomain(builder.Configuration);
 
 var app = builder.Build();
 

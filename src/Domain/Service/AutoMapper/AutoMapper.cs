@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using EasyRh.Domain.Entities;
 using EasyRh.Communication.Requests.User;
-
-namespace EasyRh.Application.Services.AutoMapper;
+using EasyRh.Domain.Entities;
 
 public class AutoMapping : Profile
 {

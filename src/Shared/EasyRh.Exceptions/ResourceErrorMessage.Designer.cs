@@ -212,5 +212,14 @@ namespace EasyRh.Exceptions {
                 return ResourceManager.GetString("No ZipCode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário já cadastrado..
+        /// </summary>
+        public static string User_Already_Registred {
+            get {
+                return ResourceManager.GetString("User_Already_Registred", resourceCulture);
+            }
+        }
     }
 }

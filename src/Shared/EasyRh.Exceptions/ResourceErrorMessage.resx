@@ -168,4 +168,7 @@
   <data name="No_Street" xml:space="preserve">
     <value>O campo rua é obrigatório</value>
   </data>
+  <data name="User_Already_Registred" xml:space="preserve">
+    <value>Usuário já cadastrado.</value>
+  </data>
 </root>
